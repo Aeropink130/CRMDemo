@@ -5,6 +5,7 @@ import com.aeropink.demo.service.UserService;
 import com.aeropink.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(UUID id) {
-        return userRepository.findById(id).orElse(null);
+    public Optional<User> findUserById(UUID id) {
+        return userRepository.findById(id);
     }
 
     @Override

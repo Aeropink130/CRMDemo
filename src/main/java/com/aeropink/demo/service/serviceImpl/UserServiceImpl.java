@@ -1,7 +1,7 @@
-package com.aeropink.demo.entity.service.serviceImpl;
+package com.aeropink.demo.service.serviceImpl;
 
 import com.aeropink.demo.entity.User;
-import com.aeropink.demo.entity.service.UserService;
+import com.aeropink.demo.service.UserService;
 import com.aeropink.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

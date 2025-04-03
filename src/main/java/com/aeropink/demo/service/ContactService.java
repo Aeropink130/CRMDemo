@@ -1,4 +1,4 @@
-package com.aeropink.demo.entity.service;
+package com.aeropink.demo.service;
 
 import com.aeropink.demo.entity.Contact;
 

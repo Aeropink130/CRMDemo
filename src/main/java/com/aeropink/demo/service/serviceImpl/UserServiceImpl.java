@@ -1,6 +1,9 @@
 package com.aeropink.demo.service.serviceImpl;
 
+import com.aeropink.demo.entity.Person;
 import com.aeropink.demo.entity.User;
+import com.aeropink.demo.model.CreateUserRequest;
+import com.aeropink.demo.repository.PersonRepository;
 import com.aeropink.demo.service.UserService;
 import com.aeropink.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -12,15 +15,30 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PersonRepository personRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PersonRepository personRepository) {
         this.userRepository = userRepository;
+        this.personRepository = personRepository;
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(CreateUserRequest cur) {
 
-        return userRepository.save(user);
+        Person newPerson = new Person();
+        newPerson.setFirstName(cur.getFirstName());
+        newPerson.setLastName(cur.getLastName());
+        newPerson.setEmail(cur.getEmail());
+
+        personRepository.save(newPerson);
+
+        User newUser = new User();
+        newUser.setPerson(newPerson);
+        newUser.setUserName(cur.getUserName());
+        newUser.setPassword(cur.getPassword());
+
+
+        return userRepository.save(newUser);
 
     }
 

@@ -1,6 +1,7 @@
 package com.aeropink.demo.controller;
 
 import com.aeropink.demo.entity.User;
+import com.aeropink.demo.model.CreateUserRequest;
 import com.aeropink.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.saveUser(user);
+    public ResponseEntity<User> createUser(@RequestBody CreateUserRequest cur) {
+        User createdUser = userService.saveUser(cur);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 

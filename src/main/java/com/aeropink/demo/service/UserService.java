@@ -1,13 +1,14 @@
 package com.aeropink.demo.service;
 
 import com.aeropink.demo.entity.User;
+import com.aeropink.demo.model.CreateUserRequest;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {
 
-    public User saveUser(User user);
+    public User saveUser(CreateUserRequest cur);
 
     public Optional<User> findUserById(UUID id);
 

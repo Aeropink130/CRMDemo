@@ -19,6 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    private String userName;
+
+    private String password;
+
     @OneToOne
     @JoinColumn(name = "person_id")
     private Person  person;

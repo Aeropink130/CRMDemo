@@ -1,0 +1,31 @@
+2025-04-03 20:56:21.517525-06:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "\000d\000a    create table [*]user (\000d\000a        id uuid not null,\000d\000a        password varchar(255),\000d\000a        user_name varchar(255),\000d\000a        person_id uuid,\000d\000a        primary key (id)\000d\000a    )"; se esperaba "identifier"
+Syntax error in SQL statement "\000d\000a    create table [*]user (\000d\000a        id uuid not null,\000d\000a        password varchar(255),\000d\000a        user_name varchar(255),\000d\000a        person_id uuid,\000d\000a        primary key (id)\000d\000a    )"; expected "identifier"; SQL statement:
+
+    create table user (
+        id uuid not null,
+        password varchar(255),
+        user_name varchar(255),
+        person_id uuid,
+        primary key (id)
+    ) [42001-232]
+2025-04-03 20:56:21.529502-06:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "\000d\000a    alter table if exists [*]user \000d\000a       drop constraint if exists UKskugu4aa786hx4o05wn6cs7q0"; se esperaba "identifier"
+Syntax error in SQL statement "\000d\000a    alter table if exists [*]user \000d\000a       drop constraint if exists UKskugu4aa786hx4o05wn6cs7q0"; expected "identifier"; SQL statement:
+
+    alter table if exists user 
+       drop constraint if exists UKskugu4aa786hx4o05wn6cs7q0 [42001-232]
+2025-04-03 20:56:21.530518-06:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "\000d\000a    alter table if exists [*]user \000d\000a       add constraint UKskugu4aa786hx4o05wn6cs7q0 unique (person_id)"; se esperaba "identifier"
+Syntax error in SQL statement "\000d\000a    alter table if exists [*]user \000d\000a       add constraint UKskugu4aa786hx4o05wn6cs7q0 unique (person_id)"; expected "identifier"; SQL statement:
+
+    alter table if exists user 
+       add constraint UKskugu4aa786hx4o05wn6cs7q0 unique (person_id) [42001-232]
+2025-04-03 20:56:21.539509-06:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "\000d\000a    alter table if exists [*]user \000d\000a       add constraint FKir5g7yucydevmmc84i788jp79 \000d\000a       foreign key (person_id) \000d\000a       references person"; se esperaba "identifier"
+Syntax error in SQL statement "\000d\000a    alter table if exists [*]user \000d\000a       add constraint FKir5g7yucydevmmc84i788jp79 \000d\000a       foreign key (person_id) \000d\000a       references person"; expected "identifier"; SQL statement:
+
+    alter table if exists user 
+       add constraint FKir5g7yucydevmmc84i788jp79 
+       foreign key (person_id) 
+       references person [42001-232]

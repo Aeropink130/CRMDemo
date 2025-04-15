@@ -1,7 +1,7 @@
 package com.aeropink.demo.service.serviceImpl;
 
 import com.aeropink.demo.entity.Person;
-import com.aeropink.demo.entity.User;
+import com.aeropink.demo.entity.AppUser;
 import com.aeropink.demo.model.CreateUserRequest;
 import com.aeropink.demo.repository.PersonRepository;
 import com.aeropink.demo.service.UserService;
@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(CreateUserRequest cur) {
-
+    public AppUser saveUser(CreateUserRequest cur) {
+        
         Person newPerson = new Person();
         newPerson.setFirstName(cur.getFirstName());
         newPerson.setLastName(cur.getLastName());
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         personRepository.save(newPerson);
 
-        User newUser = new User();
+        AppUser newUser = new AppUser();
         newUser.setPerson(newPerson);
         newUser.setUserName(cur.getUserName());
         newUser.setPassword(cur.getPassword());
@@ -43,12 +43,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserById(UUID id) {
+    public Optional<AppUser> findUserById(UUID id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public User updateUser(User user) {
+    public AppUser updateUser(AppUser user) {
         return userRepository.save(user);
     }
 

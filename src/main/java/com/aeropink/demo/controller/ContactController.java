@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/contacts")
 @CrossOrigin(origins = "*")
@@ -23,12 +26,23 @@ public class ContactController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Contact> createContact(@RequestBody CreateContactRequest ccr) {
+    public ResponseEntity<Object> createContact(@RequestBody CreateContactRequest ccr) {
         AppUser appUser = userService.findUserById(ccr.getAppUserId()).orElse(null);
         if (appUser == null) {
-            return (ResponseEntity<Contact>) ResponseEntity.status(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encotró el usuario");
         }
-        Contact createdContact = contactService.saveContact(ccr);
+        Contact createdContact = contactService.saveContact(ccr, appUser);
+
+        if (createdContact == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El email ya se encuentra registrado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdContact);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Object> getContacts(@PathVariable UUID id) {
+
+        List<Contact> contactList = contactService.findContactsByUser(id);
+        return ResponseEntity.ok(contactList);
     }
 }

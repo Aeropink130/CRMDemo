@@ -21,8 +21,11 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<AppUser> createUser(@RequestBody CreateUserRequest cur) {
+    public ResponseEntity<Object> createUser(@RequestBody CreateUserRequest cur) {
         AppUser createdUser = userService.saveUser(cur);
+        if (createdUser == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El Email ya se encuentra registrado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 

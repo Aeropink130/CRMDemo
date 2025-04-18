@@ -24,7 +24,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUser saveUser(CreateUserRequest cur) {
-        
+
+        Person existingPeson = personRepository.findByEmail(cur.getEmail()).orElse(null);
+
+        if (existingPeson != null) {
+            return null;
+        }
+
         Person newPerson = new Person();
         newPerson.setFirstName(cur.getFirstName());
         newPerson.setLastName(cur.getLastName());

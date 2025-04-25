@@ -1,5 +1,6 @@
 package com.aeropink.demo.service.serviceImpl;
 
+import com.aeropink.demo.DTO.UserDTO;
 import com.aeropink.demo.entity.Person;
 import com.aeropink.demo.entity.AppUser;
 import com.aeropink.demo.model.CreateUserRequest;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AppUser saveUser(CreateUserRequest cur) {
+    public UserDTO saveUser(CreateUserRequest cur) {
 
         Person existingPeson = personRepository.findByEmail(cur.getEmail()).orElse(null);
 
@@ -44,13 +45,42 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(cur.getPassword());
         userRepository.save(newUser);
 
-        return newUser;
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(newUser.getUserName());
+        userDTO.setFirstName(newPerson.getFirstName());
+        userDTO.setLastName(newPerson.getLastName());
+        userDTO.setEmail(newPerson.getEmail());
+
+        return userDTO;
 
     }
 
     @Override
-    public Optional<AppUser> findUserById(UUID id) {
-        return userRepository.findById(id);
+    public Optional<AppUser> findUserByIdComplete(UUID id) {
+        return Optional.ofNullable(userRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public Optional<UserDTO> findUserById(UUID id) {
+
+        AppUser user = userRepository.findById(id).orElse(null);
+
+        if (user == null) {
+            return Optional.empty();
+        }
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(user.getUserName());
+        userDTO.setFirstName(user.getPerson().getFirstName());
+        userDTO.setLastName(user.getPerson().getLastName());
+        userDTO.setEmail(user.getPerson().getEmail());
+
+        return Optional.of(userDTO);
+    }
+
+    @Override
+    public AppUser findUserByUsername(String username) {
+        return userRepository.findByUserName(username).orElse(null);
     }
 
     @Override

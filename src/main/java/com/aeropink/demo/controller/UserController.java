@@ -1,5 +1,6 @@
 package com.aeropink.demo.controller;
 
+import com.aeropink.demo.DTO.UserDTO;
 import com.aeropink.demo.entity.AppUser;
 import com.aeropink.demo.model.CreateUserRequest;
 import com.aeropink.demo.service.UserService;
@@ -22,15 +23,15 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<Object> createUser(@RequestBody CreateUserRequest cur) {
-        AppUser createdUser = userService.saveUser(cur);
+        UserDTO createdUser = userService.saveUser(cur);
         if (createdUser == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El Email ya se encuentra registrado");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<AppUser> getUserById(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID id) {
         return userService.findUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

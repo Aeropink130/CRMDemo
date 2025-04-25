@@ -12,4 +12,6 @@ import java.util.UUID;
 public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
     List<Contact> findContactsByAppUser_Id(UUID id);
+
+    Long countByAppUser_IdAndStatusDescription(UUID appUserId, String status);
 }

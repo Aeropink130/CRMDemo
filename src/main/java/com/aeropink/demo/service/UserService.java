@@ -1,5 +1,6 @@
 package com.aeropink.demo.service;
 
+import com.aeropink.demo.DTO.UserDTO;
 import com.aeropink.demo.entity.AppUser;
 import com.aeropink.demo.model.CreateUserRequest;
 
@@ -8,9 +9,13 @@ import java.util.UUID;
 
 public interface UserService {
 
-    public AppUser saveUser(CreateUserRequest cur);
+    public UserDTO saveUser(CreateUserRequest cur);
 
-    public Optional<AppUser> findUserById(UUID id);
+    public Optional<AppUser> findUserByIdComplete(UUID id);
+
+    public Optional<UserDTO> findUserById(UUID id);
+
+    public AppUser findUserByUsername(String username);
 
     public AppUser updateUser(AppUser user);
 

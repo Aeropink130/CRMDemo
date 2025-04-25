@@ -11,10 +11,10 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDTO {
+public class LoginDTO {
+
     private UUID id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
-    private String status;
+    private String token;
 }
